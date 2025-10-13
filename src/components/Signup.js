@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 export default function Signup() {
   return (
     <div className="wrapper signUp">
-      <div className="illustration">
-        <img src="https://source.unsplash.com/random" alt="illustration" />
-      </div>
+      
       <div className="form">
         <div className="heading">CREATE AN ACCOUNT</div>
         <form>

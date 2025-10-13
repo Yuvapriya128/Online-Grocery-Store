@@ -3,17 +3,19 @@ import "./styles.css";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Error from "./components/Error";
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <Switch>
-        <Route path="/" component={Login} exact />
-        <Route path="/signup" component={Signup} />
-        <Route component={Error} />
-      </Switch>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

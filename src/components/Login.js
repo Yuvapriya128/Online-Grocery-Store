@@ -8,9 +8,7 @@ const preventRefresh = (e) => {
 export default function Login() {
 	return (
 		<div className="wrapper signIn">
-			<div className="illustration">
-				<img src="https://source.unsplash.com/random" alt="illustration" />
-			</div>
+			
 			<div className="form">
 				<div className="heading">LOGIN</div>
 				<form>
