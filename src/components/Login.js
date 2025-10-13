@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "./LoginPage.css";
 
 export default function Login() {
   const [formData, setFormData] = useState({
