@@ -4,8 +4,8 @@ import "./LoginPage.css";
 
 export default function Login() {
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
+    password: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -20,14 +20,16 @@ export default function Login() {
   const validate = () => {
     const newErrors = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    }
-
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Email is invalid";
+    }
+
+    if (!formData.password.trim()) {
+      newErrors.password = "Password is required";
+    } else if (formData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
     }
 
     return newErrors;
@@ -44,7 +46,7 @@ export default function Login() {
       console.log("Login successful:", formData);
       alert("Login successful!");
       // Reset form if needed
-      setFormData({ name: "", email: "" });
+      setFormData({ email: "", password: "" });
     }
   };
 
@@ -54,27 +56,27 @@ export default function Login() {
         <div className="heading">LOGIN</div>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Enter your name"
-              value={formData.name}
-              onChange={handleChange}
-            />
-            {errors.name && <span className="error">{errors.name}</span>}
-          </div>
-
-          <div>
             <label htmlFor="email">E-Mail</label>
             <input
               type="email"
               id="email"
-              placeholder="Enter your mail"
+              placeholder="Enter your email"
               value={formData.email}
               onChange={handleChange}
             />
             {errors.email && <span className="error">{errors.email}</span>}
+          </div>
+
+          <div>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            {errors.password && <span className="error">{errors.password}</span>}
           </div>
 
           <button type="submit">Submit</button>
