@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Signup.js";
+import "./Signup.css";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -57,7 +57,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="wrapper signUp">
+    <div className="signup-container">
       <div className="form">
         <div className="heading">CREATE AN ACCOUNT</div>
         <form onSubmit={handleSubmit}>
