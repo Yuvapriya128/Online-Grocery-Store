@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./LoginPage.css";
 
 export default function Login() {
@@ -9,6 +9,7 @@ export default function Login() {
   });
 
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate(); // hook for navigation
 
   // Handle input changes
   const handleChange = (e) => {
@@ -45,8 +46,10 @@ export default function Login() {
     if (Object.keys(validationErrors).length === 0) {
       console.log("Login successful:", formData);
       alert("Login successful!");
-      // Reset form if needed
       setFormData({ email: "", password: "" });
+
+      // Redirect to admin page
+      navigate("/admin");
     }
   };
 
