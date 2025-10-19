@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "../axios";
+import "./ProductsPage.css";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
+  const [message, setMessage] = useState("");
+
   const user = JSON.parse(localStorage.getItem("user"));
-  const userId = user?.User_ID;
+  const userId = user ? user.User_ID : null;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -12,69 +15,52 @@ const ProductsPage = () => {
         const res = await axios.get("/products");
         setProducts(res.data);
       } catch (err) {
-        console.error("❌ Error fetching products:", err);
+        console.error("Error fetching products:", err);
       }
     };
     fetchProducts();
   }, []);
 
   const addToCart = async (product) => {
+    if (!userId) {
+      alert("Please login to add items to cart");
+      return;
+    }
+
     try {
-      if (!userId) {
-        alert("Please login first!");
-        return;
-      }
-
-      // Auto-create cart if not exists
-      await axios.post(`/cart/${userId}/add`, {
-        Product_ID: product.product_id,
-        Quantity: 1,
+      const res = await axios.post(`/cart/${userId}/add`, {
+        product_id: product.Product_ID,
+        product_name: product.Product_Name,
+        quantity: 1,
+        total_price: product.Price,
       });
-
-      alert(`✅ ${product.product_name} added to cart!`);
+      setMessage(res.data.message || "Added to cart!");
     } catch (err) {
-      console.error("❌ Error adding to cart:", err.response?.data || err.message);
-      alert(err.response?.data?.error || "Failed to add to cart");
+      console.error("Error adding to cart:", err);
+      setMessage("Failed to add to cart");
     }
   };
 
   return (
     <div className="products-page">
-      <h2>🛍 Products</h2>
-      <div className="products-list" style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-        {products.map((p) => (
-          <div
-            key={p.product_id}
-            className="product-card"
-            style={{
-              border: "1px solid #ccc",
-              borderRadius: "10px",
-              padding: "15px",
-              width: "200px",
-              textAlign: "center",
-            }}
-          >
-            <img
-              src={p.image}
-              alt={p.product_name}
-              style={{ width: "100%", height: "150px", objectFit: "cover", borderRadius: "8px" }}
-            />
-            <h3>{p.product_name}</h3>
-            <p>₹{p.price}</p>
-            <button
-              style={{
-                padding: "10px",
-                borderRadius: "8px",
-                backgroundColor: "#f8bbd0",
-                border: "none",
-                cursor: "pointer",
-              }}
-              onClick={() => addToCart(p)}
-            >
-              Add to Cart
-            </button>
-          </div>
-        ))}
+      <h2>Products</h2>
+
+      {message && <p className="message">{message}</p>}
+
+      <div className="products-grid">
+        {products.length > 0 ? (
+          products.map((product) => (
+            <div className="product-card" key={product.Product_ID}>
+              <img src={product.Image_URL} alt={product.Product_Name} />
+              <h3>{product.Product_Name}</h3>
+              <p>{product.Description}</p>
+              <p className="price">₹{product.Price}</p>
+              <button onClick={() => addToCart(product)}>Add to Cart</button>
+            </div>
+          ))
+        ) : (
+          <p>No products found</p>
+        )}
       </div>
     </div>
   );
