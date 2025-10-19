@@ -1,14 +1,15 @@
 .products-page {
   padding: 40px 0;
   min-height: 80vh;
+  text-align: center; /* centers headings and messages */
 }
 
 .category-filter {
   display: flex;
   gap: 1rem;
   margin-bottom: 2rem;
+  justify-content: center; /* centers filter buttons */
   flex-wrap: wrap;
-  justify-content: center;
 }
 
 .filter-btn {
@@ -19,6 +20,7 @@
   border-radius: 25px;
   cursor: pointer;
   transition: all 0.3s;
+  font-weight: 500;
 }
 
 .filter-btn:hover,
@@ -29,9 +31,12 @@
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* use auto-fit for responsive centering */
+  gap: 5rem;
+  justify-content: center; /* centers the grid inside container */
+  padding: 0 5rem; /* optional: add some side padding for small screens */
 }
+
 
 .product-card {
   background: var(--white);
@@ -39,6 +44,10 @@
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center content inside card */
+  text-align: center;  /* center text inside card */
 }
 
 .product-card:hover {

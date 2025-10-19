@@ -18,8 +18,9 @@ const Navbar = () => {
             <Link to="/products" onClick={() => setIsMenuOpen(false)}>Products</Link>
             <Link to="/about" onClick={() => setIsMenuOpen(false)}>About Us</Link>
             <Link to="/cart" onClick={() => setIsMenuOpen(false)} className="cart-link">
-              Cart <span className="cart-count">0</span>
+              Cart 
             </Link>
+            <Link to="/orders" onClick={() => setIsMenuOpen(false)}>Orders</Link>
             {/* ✅ New Signup Link */}
             <Link to="/signup" onClick={() => setIsMenuOpen(false)}>Sign Up</Link>
           </div>

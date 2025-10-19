@@ -40,19 +40,28 @@ export const viewCart = async (req, res) => {
 };
 
 // Add Item to Cart
+// Add Item to Cart
 export const addItem = async (req, res) => {
   try {
     const { User_ID } = req.params;
     const { Product_ID, Quantity } = req.body;
 
-   let cart = await Cart.findOne({ user_id: User_ID });
-if (!cart) {
-  cart = await Cart.create({ cart_id: uuidv4(), user_id: User_ID });
-}
+    // ✅ Find or create cart for user
+    let cart = await Cart.findOne({ user_id: User_ID });
+    if (!cart) {
+      cart = new Cart({
+        cart_id: uuidv4(),
+        user_id: User_ID,
+      });
+      await cart.save();
+      console.log(`New cart created for user ${User_ID}`);
+    }
 
+    // ✅ Find product
     const product = await Product.findOne({ product_id: Product_ID });
     if (!product) return res.status(404).json({ error: "Product not found" });
 
+    // ✅ Check if cart item already exists
     let cartItem = await CartItem.findOne({
       cart_id: cart.cart_id,
       product_id: Product_ID,
@@ -74,6 +83,7 @@ if (!cart) {
       });
     }
 
+    // ✅ Create new cart item
     cartItem = new CartItem({
       cartitem_id: uuidv4(),
       cart_id: cart.cart_id,
@@ -98,6 +108,7 @@ if (!cart) {
     res.status(500).json({ error: "Server error" });
   }
 };
+
 
 // Update Cart Item Quantity
 export const updateItem = async (req, res) => {

@@ -7,7 +7,14 @@ export const registerUser = async (req, res) => {
 
     const exists = await User.findOne({ user_email });
     if (exists) return res.status(400).json({ error: "Email already registered" });
-
+    if (role === "admin") {
+      const existingAdmin = await User.findOne({ role: "admin" });
+      if (existingAdmin) {
+        return res
+          .status(403)
+          .json({ error: "Admin already exists. Cannot register another admin." });
+      }
+    }
     const user_id = "U" + Date.now();
 
     const user = await User.create({

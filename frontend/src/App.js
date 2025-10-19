@@ -10,6 +10,8 @@ import AdminPage from "./components/AdminPage";
 import AboutUs from './components/AboutUs';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Terms from './components/Terms';
+import Cart from './components/Cart';
+import OrdersPage from "./components/OrdersPage";
 function App() {
   return (
     <Router>
@@ -26,6 +28,8 @@ function App() {
   <Route path="/signup" element={<Signup />} />
   <Route path="/login" element={<Login />} />
   <Route path="/products" element={<ProductsPage />} />
+  <Route path="/orders" element={<OrdersPage />} />
+  <Route path="/cart" element={<Cart />} />
   <Route path="/admin" element={<AdminPage />} /> {/* ✅ AdminPage route */}
 </Routes>
       </div>
