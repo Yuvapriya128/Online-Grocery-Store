@@ -1,0 +1,76 @@
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background: #fff3f8; /* soft pink background */
+}
+
+.login-container {
+  position: relative;
+  width: 400px;
+  padding: 30px;
+  background: linear-gradient(135deg, #ffb6c1, #ffc0cb); /* light pink gradient */
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.login-container:hover {
+  transform: translateY(-5px);
+}
+
+.login-container h2 {
+  margin-bottom: 25px;
+  color: #c2185b; /* dark pink text */
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+.login-container input {
+  display: block;
+  width: 90%;
+  margin: 12px auto;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.login-container input:focus {
+  border: 2px solid #ff69b4; /* hot pink focus */
+  outline: none;
+}
+
+.login-container button {
+  width: 95%;
+  padding: 12px;
+  margin-top: 15px;
+  background-color: #ff69b4; /* hot pink button */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-container button:hover {
+  background-color: #ff85c1;
+}
+
+.signup-link {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #c2185b;
+}
+
+.signup-link a {
+  color: #c2185b;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
